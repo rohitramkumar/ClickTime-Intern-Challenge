@@ -14,9 +14,9 @@ wants to generate the route and what donut shop they want.
 TODO: Should this be in a seperate module?"""
 class PrefsForm(Form):
   current_lat = StringField(
-      'Current latitude: ( Edit this field at your own risk ... )')
+      'Current latitude: ( You can edit this field if want )')
   current_lng = StringField(
-      'Current longitude: ( Edit this field at your own risk ... )')
+      'Current longitude: ( You can edit this field if want )')
   transportation_mode = RadioField('Mode of transportation:', 
       choices=[('driving', 'Driving'), ('bicycling', 'Bicycling'), 
       ('transit', 'Public Transit/Walking')], default='driving')
@@ -39,9 +39,10 @@ def index():
     current_location = {
         'lat' : float(form.current_lat.data), 
         'lng' : float(form.current_lng.data) }
-    re = route.getRoute(current_location, form.transportation_mode.data,
+    directions = route.getDirections(current_location, 
+        form.transportation_mode.data,
         form.shop_preference.data)
-    return render_template('results.html', route=re)
+    return render_template('results.html', directions=directions)
   return render_template('index.html', form=form)
 
 if __name__ == '__main__':

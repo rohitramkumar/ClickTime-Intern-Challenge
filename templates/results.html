@@ -3,7 +3,7 @@
 {% block j_content %}
 <h2>Directions:</h2>
 </br>
-{% for step in route %}
-<p>{{ step|safe }}</p>
+{% for direction in directions %}
+<p>{{ direction|safe }}</p>
 {% endfor %}
 {% endblock %}

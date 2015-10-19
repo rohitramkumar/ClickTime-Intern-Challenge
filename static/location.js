@@ -1,6 +1,4 @@
 /*
-* Tried to follow Google's Javascript Coding Style as closely as possible.
-*
 * Credit to the link below for the idea on how to get a users current location.
 * http://toddmotto.com/using-html5-geolocation-to-show-current-location-with-google-maps-api/
 */
@@ -17,19 +15,19 @@ var DEFAULT_USER_LOCATION = {'lat' : 40.1163889, 'lng' : -88.2433333}
 */
 function getLocation() { 
   if(!!navigator.geolocation) {		
-    initDialog();
-    $('#dialog').dialog('open');
-    navigator.geolocation.getCurrentPosition(function(position) {				
-	  fillFormWithCoordinates(position.coords.latitude,
-		  position.coords.longitude);			
+    initAndOpenDialog(); 
+    navigator.geolocation.getCurrentPosition(function(position) {	
+      $('#dialog').dialog('close');			
+	    fillFormWithCoordinates(position.coords.latitude,
+		      position.coords.longitude);			
 	  }, function(error) {
-      alert('You blocked geolocation. Using defaults.')
+      $('#dialog').dialog('close');
+      alert('You blocked geolocation. Using default location of Champaign, IL.')
 		  fillFormWithCoordinates(DEFAULT_USER_LOCATION['lat'],
 		      DEFAULT_USER_LOCATION['lng']);
 	  });
-    $('#dialog').dialog('close');
 	} else {
-	  alert('Geolocation is not available. Using defaults.')
+	  alert('Geolocation is not available. Using default location of Champaign, IL.');
 	  fillFormWithCoordinates(DEFAULT_USER_LOCATION['lat'],
 		    DEFAULT_USER_LOCATION['lng']);
 	}
@@ -37,13 +35,13 @@ function getLocation() {
 
 /**
 * Initialize the modal dialog which indicates that the user's geolocation
-* is being fetched. 
+* is being fetched and open it initially. 
 */
-function initDialog() {
+function initAndOpenDialog() {
   $('#dialog').dialog({
     width: 275,
     height: 60,
-    autoOpen: false,
+    autoOpen: true,
     modal: true,
   });		
 }
