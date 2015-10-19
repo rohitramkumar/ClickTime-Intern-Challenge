@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block body %}
+{{ super() }}
+<div id='dialog'>Gathering your location...</div>
+{% endblock %}
+
+{% block j_content %}
+<h1>Welcome!</h1>
+<h5>This application will provide you with instructions on how to
+get from your current location to the ClickTime office while stopping on the
+way for donuts and coffee. The form below allows you to specify what mode
+of transportation you want to use. It also allows you to specify a preference
+as to what donut shop you want to go to. For now, you are allowed to
+choose the donut shop that is closest to the office, or most popular.
+</h5>
+</br>
+
+<p>{{ wtf.form_field(form.current_location) }}</p>
+
+<h5>{{ form.transportation.label }}</h5>
+<p>{{ wtf.form_field(form.transportation) }}</p>
+
+<h5>{{ form.shop_preference.label }}</h5>
+<p>{{ wtf.form_field(form.shop_preference) }}</p>
+
+{{ form.submit }}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='location.js') }}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet"></script>
+<link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/ui-darkness/jquery-ui.min.css" rel="stylesheet">
+{% endblock %}
