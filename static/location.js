@@ -6,7 +6,7 @@
 /**
 * The default user location. Currently Champaign, IL.
 */
-var DEFAULT_USER_LOCATION = {'lat' : 40.1163889, 'lng' : -88.2433333}
+var DEFAULT_USER_LOCATION = {'lat' : 40.1163889, 'lng' : -88.2433333};
 
 /**
 * Retrieve the user's location. In the case that geolocation is not
@@ -27,7 +27,7 @@ function getLocation() {
 		      DEFAULT_USER_LOCATION['lng']);
 	  });
 	} else {
-	  alert('Geolocation is not available. Using default location of Champaign, IL.');
+	  alert('Geolocation not available. Using default location of Champaign, IL.');
 	  fillFormWithCoordinates(DEFAULT_USER_LOCATION['lat'],
 		    DEFAULT_USER_LOCATION['lng']);
 	}
@@ -35,7 +35,7 @@ function getLocation() {
 
 /**
 * Initialize the modal dialog which indicates that the user's geolocation
-* is being fetched and open it initially. 
+* is being fetched and open it. 
 */
 function initAndOpenDialog() {
   $('#dialog').dialog({
@@ -48,10 +48,13 @@ function initAndOpenDialog() {
 
 /**
 * Fill the form with the coordinates of the user location.
+* Disable any input for these fields.
 */
 function fillFormWithCoordinates(lat, lng) {
   $('#current_lat').val(lat);
+  $('#current_lat').attr('readonly', 'readonly');
   $('#current_lng').val(lng);
+  $('#current_lng').attr('readonly', 'readonly');
 }
 
 window.onload = getLocation;
