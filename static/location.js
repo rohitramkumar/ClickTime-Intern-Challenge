@@ -17,20 +17,21 @@ var DEFAULT_USER_LOCATION = {'lat' : 40.1163889, 'lng' : -88.2433333}
 */
 function getLocation() { 
   if(!!navigator.geolocation) {		
-  	initDialog();
-  	$('#dialog').dialog('open');
+    initDialog();
+    $('#dialog').dialog('open');
     navigator.geolocation.getCurrentPosition(function(position) {				
 	  fillFormWithCoordinates(position.coords.latitude,
-			position.coords.longitude);			
-	  $('#dialog').dialog('close');
+		  position.coords.longitude);			
 	  }, function(error) {
+      alert('You blocked geolocation. Using defaults.')
 		  fillFormWithCoordinates(DEFAULT_USER_LOCATION['lat'],
 		      DEFAULT_USER_LOCATION['lng']);
 	  });
+    $('#dialog').dialog('close');
 	} else {
 	  alert('Geolocation is not available. Using defaults.')
 	  fillFormWithCoordinates(DEFAULT_USER_LOCATION['lat'],
-		  DEFAULT_USER_LOCATION['lng']);
+		    DEFAULT_USER_LOCATION['lng']);
 	}
 }
 
@@ -42,8 +43,8 @@ function initDialog() {
   $('#dialog').dialog({
     width: 275,
     height: 60,
-	autoOpen: false,
-	modal: true,
+    autoOpen: false,
+    modal: true,
   });		
 }
 
@@ -51,7 +52,8 @@ function initDialog() {
 * Fill the form with the coordinates of the user location.
 */
 function fillFormWithCoordinates(lat, lng) {
-  $('#current_location').val(lat + ', ' + lng);
+  $('#current_lat').val(lat);
+  $('#current_lng').val(lng);
 }
 
 window.onload = getLocation;

@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block j_content %}
-<h2>Directions are as follows...</h2>
-
-{% for step in directions %}
-<p>step</p>
+<h2>Directions:</h2>
+</br>
+{% for step in route %}
+<p>{{ step|safe }}</p>
 {% endfor %}
 {% endblock %}

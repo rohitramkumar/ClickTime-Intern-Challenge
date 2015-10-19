@@ -13,14 +13,16 @@ import route
 wants to generate the route and what donut shop they want.
 TODO: Should this be in a seperate module?"""
 class PrefsForm(Form):
-  current_location = StringField(
-  'Current location: ( Edit this field at your own risk ... )')
-  transportation = RadioField('Mode of transportation:', 
-    choices=[('driving', 'Driving'), ('bicycling', 'Bicycling'), 
-    ('transit', 'Public Transit/Walking')], default='driving')
+  current_lat = StringField(
+      'Current latitude: ( Edit this field at your own risk ... )')
+  current_lng = StringField(
+      'Current longitude: ( Edit this field at your own risk ... )')
+  transportation_mode = RadioField('Mode of transportation:', 
+      choices=[('driving', 'Driving'), ('bicycling', 'Bicycling'), 
+      ('transit', 'Public Transit/Walking')], default='driving')
   shop_preference = RadioField('Donut Shop Preference:', 
-    choices=[('distance', 'Distance'), ('prominence', 'Prominence')], 
-    default='distance')
+      choices=[('distance', 'Distance'), ('prominence', 'Prominence')], 
+      default='distance')
 
   submit = SubmitField('Submit')
 
@@ -34,8 +36,12 @@ Bootstrap(app)
 def index():
   form = PrefsForm(csrf_enabled=False)
   if form.validate_on_submit():
-    directions = route.getRoute()
-    return render_template('results.html', directions=directions)
+    current_location = {
+        'lat' : float(form.current_lat.data), 
+        'lng' : float(form.current_lng.data) }
+    re = route.getRoute(current_location, form.transportation_mode.data,
+        form.shop_preference.data)
+    return render_template('results.html', route=re)
   return render_template('index.html', form=form)
 
 if __name__ == '__main__':

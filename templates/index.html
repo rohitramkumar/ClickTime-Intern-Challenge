@@ -16,15 +16,7 @@ choose the donut shop that is closest to the office, or most popular.
 </h5>
 </br>
 
-<p>{{ wtf.form_field(form.current_location) }}</p>
-
-<h5>{{ form.transportation.label }}</h5>
-<p>{{ wtf.form_field(form.transportation) }}</p>
-
-<h5>{{ form.shop_preference.label }}</h5>
-<p>{{ wtf.form_field(form.shop_preference) }}</p>
-
-{{ form.submit }}
+{{ wtf.quick_form(form) }}
 {% endblock %}
 
 {% block scripts %}
