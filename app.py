@@ -13,16 +13,16 @@ import route
 wants to generate the route and what donut shop they want.
 TODO: Should this be in a seperate module?"""
 class PrefsForm(Form):
-	current_location = StringField(
-		'Current location: ( Edit this field at your own risk ... )')
-	transportation = RadioField('Mode of transportation:', 
-		choices=[('driving', 'Driving'), ('bicycling', 'Bicycling'), 
-		('transit', 'Public Transit/Walking')], default='driving')
-	shop_preference = RadioField('Donut Shop Preference:', 
-		choices=[('distance', 'Distance'), ('prominence', 'Prominence')], 
-		default='distance')
+  current_location = StringField(
+  'Current location: ( Edit this field at your own risk ... )')
+  transportation = RadioField('Mode of transportation:', 
+    choices=[('driving', 'Driving'), ('bicycling', 'Bicycling'), 
+    ('transit', 'Public Transit/Walking')], default='driving')
+  shop_preference = RadioField('Donut Shop Preference:', 
+    choices=[('distance', 'Distance'), ('prominence', 'Prominence')], 
+    default='distance')
 
-	submit = SubmitField('Submit')
+  submit = SubmitField('Submit')
 
 # WSGI callable
 app = Flask(__name__)
@@ -32,13 +32,13 @@ Bootstrap(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-	form = PrefsForm(csrf_enabled=False)
-	if form.validate_on_submit():
-		directions = route.getRoute()
-		return render_template('results.html', directions=directions)
-	return render_template('index.html', form=form)
+  form = PrefsForm(csrf_enabled=False)
+  if form.validate_on_submit():
+    directions = route.getRoute()
+    return render_template('results.html', directions=directions)
+  return render_template('index.html', form=form)
 
 if __name__ == '__main__':
-	# For debugging purposes
-    app.run(debug=True)
+  # For debugging purposes
+  app.run(debug=True)
 
