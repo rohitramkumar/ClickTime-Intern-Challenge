@@ -11,7 +11,7 @@ class PrefsForm(Form):
   transportation_mode = SelectField(
       'Mode of transportation:', 
       choices=[('driving', 'Driving'), ('bicycling', 'Bicycling'), 
-      ('transit', 'Public Transit/Walking')], default='driving')
+      ('transit', 'Public Transit/Walking')], default='transit')
   shop_preference = SelectField(
       'Donut Shop Preference:', 
       choices=[('distance', 'Distance'), ('prominence', 'Prominence')], 

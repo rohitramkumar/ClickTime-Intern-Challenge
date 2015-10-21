@@ -17,11 +17,11 @@ function getLocation() {
   if(!!navigator.geolocation) {   
     initAndOpenDialog(); 
     navigator.geolocation.getCurrentPosition(function(position) { 
-      $('#dialog').dialog('close');     
+      $('#modal_dialog').dialog('close');     
       fillFormWithCoordinates(position.coords.latitude,
           position.coords.longitude);     
     }, function(error) {
-      $('#dialog').dialog('close');
+      $('#modal_dialog').dialog('close');
       alert('You blocked geolocation. Using default location of Champaign, IL.')
       fillFormWithCoordinates(DEFAULT_USER_LOCATION['lat'],
           DEFAULT_USER_LOCATION['lng']);
@@ -38,7 +38,7 @@ function getLocation() {
 * is being fetched and open it. 
 */
 function initAndOpenDialog() {
-  $('#dialog').dialog({
+  $('#modal_dialog').dialog({
     width: 275,
     height: 60,
     autoOpen: true,
