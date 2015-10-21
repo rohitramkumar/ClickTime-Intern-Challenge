@@ -14,23 +14,23 @@ var DEFAULT_USER_LOCATION = {'lat' : 40.1163889, 'lng' : -88.2433333};
 * of Champaign, IL.
 */
 function getLocation() { 
-  if(!!navigator.geolocation) {		
+  if(!!navigator.geolocation) {   
     initAndOpenDialog(); 
-    navigator.geolocation.getCurrentPosition(function(position) {	
-      $('#dialog').dialog('close');			
-	    fillFormWithCoordinates(position.coords.latitude,
-		      position.coords.longitude);			
-	  }, function(error) {
+    navigator.geolocation.getCurrentPosition(function(position) { 
+      $('#dialog').dialog('close');     
+      fillFormWithCoordinates(position.coords.latitude,
+          position.coords.longitude);     
+    }, function(error) {
       $('#dialog').dialog('close');
       alert('You blocked geolocation. Using default location of Champaign, IL.')
-		  fillFormWithCoordinates(DEFAULT_USER_LOCATION['lat'],
-		      DEFAULT_USER_LOCATION['lng']);
-	  });
-	} else {
-	  alert('Geolocation not available. Using default location of Champaign, IL.');
-	  fillFormWithCoordinates(DEFAULT_USER_LOCATION['lat'],
-		    DEFAULT_USER_LOCATION['lng']);
-	}
+      fillFormWithCoordinates(DEFAULT_USER_LOCATION['lat'],
+          DEFAULT_USER_LOCATION['lng']);
+    });
+  } else {
+    alert('Geolocation not available. Using default location of Champaign, IL.');
+    fillFormWithCoordinates(DEFAULT_USER_LOCATION['lat'],
+        DEFAULT_USER_LOCATION['lng']);
+  }
 }
 
 /**
@@ -43,7 +43,7 @@ function initAndOpenDialog() {
     height: 60,
     autoOpen: true,
     modal: true,
-  });		
+  });   
 }
 
 /**
