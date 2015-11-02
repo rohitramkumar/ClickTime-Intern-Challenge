@@ -16,8 +16,8 @@ def index():
   form = PrefsForm(csrf_enabled=False)
   if form.validate_on_submit():
     current_location = {
-      'lat' : form.current_lat.data, 
-      'lng' : form.current_lng.data }
+        'lat' : form.current_lat.data, 
+        'lng' : form.current_lng.data }
     directions = getDirections(
         current_location, 
         form.transportation_mode.data,
